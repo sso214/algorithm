@@ -99,14 +99,146 @@ function solution(numbers, hand) {
 
     return arr.join('');
 }
-
 /*
 이 문제를 풀 때 현재 손 위치와 주어진 값의 위치의 거리를 어떻게 구해야할지
 공식을 모르겠어서 질문하기의 힘을 빌렸다.
-기초적인 좌표간의 거리를 구하는 방식으로는 보통 맨하튼 거리 공식을 사용하는데,
-시작 좌표를 (x1,y1), 도착 좌표를 (x2,y2)라고 할 떄,
-|x1 - x2| + |y1 + y2| 이다! 엄청 심플!
-즉, 멘해튼 거리 공식 = x값의 차와 y값의 차를 각각 절대값으로 변경한 뒤 합한 값
+
+기초적인 좌표간의 거리를 구하는 방식으로는 보통 "맨하튼 거리 공식"을 사용하는데,
+시작 좌표를 (x1,y1), 도착 좌표를 (x2,y2)라고 할 떄, |x1 - x2| + |y1 + y2| 이다! 엄청 심플!
+즉, 멘해튼 거리 공식 = x값의 차와 y값의 차를 각각 절대값으로 변경한 뒤 합한 값.
 위의 개념을 알고서야 문제를 풀 수 있었다.
 다음에 이런 좌표를 사용하는 문제가 나오면 써먹어야지!
+
+chatGPT에게 물어보니 아래 답변들과 내 답변 중 내 답변이
+모든 경우에 대한 최단 거리를 매번 계산하고 있지 않고, Map 객체를 사용하기 때문에
+더 성능이 좋다고 했다!! chatGTP한테 칭찬받은거 처음이야!
 */
+
+/* 다른 사람들의 답변 */
+function solution2(numbers, hand) {
+    hand = hand[0] === "r" ? "R" : "L"
+    let position = [1, 4, 4, 4, 3, 3, 3, 2, 2, 2]
+    let h = { L: [1, 1], R: [1, 1] }
+    return numbers.map(x => {
+        if (/[147]/.test(x)) {
+            h.L = [position[x], 1]
+            return "L"
+        }
+        if (/[369]/.test(x)) {
+            h.R = [position[x], 1]
+            return "R"
+        }
+        let distL = Math.abs(position[x] - h.L[0]) + h.L[1]
+        let distR = Math.abs(position[x] - h.R[0]) + h.R[1]
+        if (distL === distR) {
+            h[hand] = [position[x], 0]
+            return hand
+        }
+        if (distL < distR) {
+            h.L = [position[x], 0]
+            return "L"
+        }
+        h.R = [position[x], 0]
+        return "R"
+    }).join("")
+}
+
+const solution3 = (numbers, hand) => {
+    const answer = [];
+    let leftHandPosition = '*';
+    let rightHandPosition = '#';
+
+    numbers.forEach(number => {
+        if (number === 1 || number === 4 || number === 7) {
+            answer.push('L');
+            leftHandPosition = number;
+            return;
+        }
+
+        if (number === 3 || number === 6 || number === 9) {
+            answer.push('R');
+            rightHandPosition = number;
+            return;
+        }
+
+        const leftHandDistance = getDistance(leftHandPosition, number);
+        const rightHandDistance = getDistance(rightHandPosition, number);
+
+        if (leftHandDistance === rightHandDistance) {
+            if (hand === "right") {
+                answer.push('R');
+                rightHandPosition = number;
+                return;
+            }
+
+            if (hand === 'left') {
+                answer.push('L');
+                leftHandPosition = number;
+                return;
+            }
+        }
+
+        if (leftHandDistance > rightHandDistance) {
+            answer.push('R');
+            rightHandPosition = number;
+        }
+
+        if (leftHandDistance < rightHandDistance) {
+            answer.push('L');
+            leftHandPosition = number;
+        }
+    });
+
+    return answer.join("");
+};
+const getDistance = (locatedNumber, target) => {
+    const keyPad = {
+        1: [0, 0], 2: [0, 1], 3: [0, 2],
+        4: [1, 0], 5: [1, 1], 6: [1, 2],
+        7: [2, 0], 8: [2, 1], 9: [2, 2],
+        '*': [3, 0], 0: [3, 1], '#': [3, 2],
+    }
+
+    const nowPosition = keyPad[locatedNumber];
+    const targetPosition = keyPad[target];
+
+    return Math.abs(targetPosition[0] - nowPosition[0]) + Math.abs(targetPosition[1] - nowPosition[1]);
+};
+
+function solution4(numbers, hand) {
+    let answer = '';
+    // imagine a grid, and assign each number coordinates
+    // by taking 5 being 0,0.
+    // If needed, this can also be done programmatically.
+    const grid = [[0,-2], [-1,1], [0,1], [1,1], [-1,0], [0,0], [1,0], [-1,-1], [0,-1], [1,-1], [-1,-2], [1,-2]];
+    let L = 10; // 10th element of the grid are * and # of the keypad
+    let R = 11; // 11th
+    let L_steps, R_steps;
+    hand = hand[0].toUpperCase();
+    numbers.forEach(el => {
+        switch (grid[el][0]){
+            case -1:
+                answer += "L";
+                L = el;
+                break;
+            case 1:
+                answer += "R";
+                R = el;
+                break;
+            case 0:
+                L_steps = Math.abs(grid[L][0] - grid[el][0]) + Math.abs(grid[L][1] - grid[el][1]);
+                R_steps = Math.abs(grid[R][0] - grid[el][0]) + Math.abs(grid[R][1] - grid[el][1]);
+                if(L_steps > R_steps){
+                    answer += "R";
+                    R = el;
+                } else if (L_steps < R_steps){
+                    answer += "L";
+                    L = el;
+                } else {
+                    answer += hand;
+                    eval(`${hand} = el`); //may affect performance?
+                }
+        }
+    });
+    return answer;
+}
