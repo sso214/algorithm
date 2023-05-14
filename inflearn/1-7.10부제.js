@@ -29,7 +29,7 @@
 */
 
 /* 내 답변 */
-const solution = (n, arr) => arr.filter((v) => v.toString()[1] === n.toString()).length;
+const solution = (n, arr) => arr.filter((v) => v % 10 === n).length;
 
-solution(3, [25, 23, 11, 47, 53, 17, 33]);
-solution(0, [12, 20, 54, 30, 87, 91, 30]);
+console.log(solution(3, [25, 23, 11, 47, 53, 17, 33]));
+console.log(solution(0, [12, 20, 54, 30, 87, 91, 30]));

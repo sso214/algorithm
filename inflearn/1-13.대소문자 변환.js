@@ -18,4 +18,4 @@ function solution(text) {
     return text.replace(/[A-Z]/g, `${'$&'.toLowerCase()}`).replace(/[a-z]/g, `${'$&'.toUpperCase()}`);
 }
 
-console.log(solution('StuDY'));
+solution('StuDY');
