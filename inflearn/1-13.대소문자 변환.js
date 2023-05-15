@@ -14,8 +14,6 @@ StuDY
 sTUdy
 */
 
-function solution(text) {
-    return text.replace(/[A-Z]/g, `${'$&'.toLowerCase()}`).replace(/[a-z]/g, `${'$&'.toUpperCase()}`);
-}
+const solution = (text) => text.replace(/[A-Z]/g, `${'$&'.toLowerCase()}`).replace(/[a-z]/g, `${'$&'.toUpperCase()}`);
 
 solution('StuDY');

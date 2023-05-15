@@ -51,3 +51,20 @@ const solution2 = (arr) => {
 console.log(solution2([87, 89, 92, 100, 76]));
 console.log(solution2([87, 87, 92, 100, 76, 56, 76, 76]));
 console.timeEnd("얼마나 걸리냐2");
+
+
+console.time("얼마나 걸리냐3");
+const solution3 = (arr) => {
+    let n = arr.length;
+    let result = Array.from({length: n}, () => 1);
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (arr[j] > arr[i]) result[i]++;
+        }
+    }
+    return result;
+}
+console.log(solution3([87, 89, 92, 100, 76]));
+console.log(solution3([87, 87, 92, 100, 76, 56, 76, 76]));
+console.timeEnd("얼마나 걸리냐3");

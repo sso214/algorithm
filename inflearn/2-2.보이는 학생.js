@@ -12,14 +12,13 @@
 선생님이 볼 수 있는 최대학생수를 출력한다
 
 입력예제 1
-8
 130 135 148 140 145 150 150 153
 
 출력예제 1
 5
 */
 
-const solution = (n, arr) => {
+const solution = (arr) => {
     let max = 0;
     const result = arr.filter((v) => {
         if (v > max) {
@@ -30,4 +29,4 @@ const solution = (n, arr) => {
     return result.length;
 }
 
-console.log(solution(8, [130, 135, 148, 140, 145, 150, 150, 153]));
+solution([130, 135, 148, 140, 145, 150, 150, 153]);

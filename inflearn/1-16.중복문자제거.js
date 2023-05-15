@@ -16,5 +16,22 @@ kset
 */
 
 /* 내 답변 */
-const solution = (text) => [...new Set(text)].join('');
-solution('ksekkset');
+const solution1 = (text) => [...new Set(text)].join('');
+solution1('ksekkset');
+
+const solution2 = (text) => {
+    let result = '';
+
+    for (let i = 0; i < text.length; i++) {
+        if (i === text.indexOf(text[i])) {
+            result += text[i];
+        }
+    }
+    return result;
+}
+solution2('ksekkset');
+
+const solution3 = (text) => {
+    let result = '';
+    let pos = text.indexOf('k');
+}

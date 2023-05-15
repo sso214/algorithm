@@ -23,5 +23,8 @@ student
 */
 
 /*내 답변*/
-const solution = (arr) => [...new Set(arr)];
-solution(['good', 'time', 'good', 'time', 'student'])
+const solution1 = (arr) => [...new Set(arr)];
+solution1(['good', 'time', 'good', 'time', 'student']);
+
+const solution2 = (arr) => arr.filter((v, i) => arr.indexOf(v) === i);
+solution2(['good', 'time', 'good', 'time', 'student']);

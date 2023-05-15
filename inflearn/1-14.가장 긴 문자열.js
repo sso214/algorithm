@@ -22,7 +22,7 @@ beautiful
 */
 
 /*내 답변*/
-function solution(number, arr) {
+function solution(arr) {
     let result = '';
     for (const v of arr) {
         if (result.length < v.length) {
@@ -32,4 +32,4 @@ function solution(number, arr) {
     return result;
 }
 
-solution(5, ['teacher', 'time', 'student', 'beautiful', 'good']);
+solution(['teacher', 'time', 'student', 'beautiful', 'good']);

@@ -49,4 +49,4 @@ const solution = (arr) => {
     return sum;
 };
 
-console.log(solution([1,0,1,1,1,0,0,1,1,0]));
+solution([1, 0, 1, 1, 1, 0, 0, 1, 1, 0]);

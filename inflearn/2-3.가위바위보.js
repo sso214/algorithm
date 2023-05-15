@@ -20,7 +20,6 @@ B의 정보 1 1 2 2 3
 각 줄에 각 회의 승자를 출력합니다. 비겼을 경우는 D를 출력합니다.
 
 ▣ 입력예제 1
-5
 2 3 3 1 3
 1 1 2 2 3
 
@@ -32,7 +31,7 @@ B
 D
 */
 
-const solution = (n, arr1, arr2) => {
+const solution = (arr1, arr2) => {
     return arr1.map((v, i) => {
         if (v === arr2[i]) return 'D';
         const sum = v - arr2[i];
@@ -41,4 +40,4 @@ const solution = (n, arr1, arr2) => {
     });
 };
 
-console.log(solution(5, [2,3,3,1,3], [1,1,2,2,3]));
+solution([2, 3, 3, 1, 3], [1, 1, 2, 2, 3]);

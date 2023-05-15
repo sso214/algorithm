@@ -22,7 +22,7 @@ oo
 */
 
 /*내 답변*/
-function solution(text) {
+function solution1(text) {
     const index = text.length / 2;
     if (Number.isInteger(index)) {
         return text.slice(index - 1, index + 1);
@@ -30,5 +30,19 @@ function solution(text) {
     return text.slice(Math.round(index) - 1, Math.round(index));
 }
 
-solution('study');
-solution('good');
+function solution2(text) {
+    let result = '';
+    let mid = Math.floor(text.length / 2);
+
+    if (s.length % 2 === 1) {
+        result = text.substring(mid, mid + 1);
+    } else {
+        result = text.substring(mid - 1, mid + 1);
+    }
+    return result;
+}
+
+solution1('study');
+solution1('good');
+solution2('study');
+solution2('good');

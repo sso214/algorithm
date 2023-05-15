@@ -13,5 +13,18 @@ ItisTimeToStudy
 ▣ 출력예제 1
 ITISTIMETOSTUDY
 */
-const solution = (text) => text.toUpperCase();
-solution('ItisTimeToStudy');
+const solution1 = (text) => text.toUpperCase();
+const solution2 = (text) => {
+    let result = '';
+    for (let v of text) {
+        if (v === v.toLowerCase()) {
+            result += v.toUpperCase();
+        } else {
+            result += v;
+        }
+    }
+    return result;
+};
+
+solution1('ItisTimeToStudy');
+solution2('ItisTimeToStudy');
