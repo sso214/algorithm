@@ -11,62 +11,24 @@
 ▣ 출력예제 1 10121012210
 */
 
-
 /*내 답변*/
 function solution(s, t) {
-  let result = '';
-  const arr = s.split(t);
-  console.log(arr);
+  let arr = Array.from({length: s.length}).fill(s.length);
+  let step = [s.length, s.length];
 
-  for(let i=0; i<arr.length; i++) {
-    if (i !== 0) result += '0';
-    if (arr[i].length === 1) {
-      result += '1';
-      break;
-    }
+  for (let i = 0; i < s.length; i++) {
+    const endIndex = s.length - 1 - i;
 
-//1221
-//12321
+    step[0] = s[i] === t ? 0 : step[0] + 1;
+    step[1] = s[endIndex] === t ? 0 : step[1] + 1;
 
-    for (let j=0; j<arr[i].length; j++) {
-
-
-      if (j < Math.floor(arr[i].length / 2)) {
-        result += `${j+1}`;
-      } else {
-        result += `?`;
-      }
-    }
-
-    // const v = Array.from({length:arr.length / 2}, (_,i) => i);
-    // result += v.join('');
-    // result += v.reverse().join('');
-
-    // for(let j=0; j<arr[i].length; j++) {
-    //   if (arr[i].length % 2 >= j) {
-    //     result += `${j+1}`;
-    //   } else {
-    //     result += `?`;
-    //   }
-    // }
+    arr[i] = Math.min(arr[i], step[0]);
+    arr[s.length - 1 - i] = Math.min(arr[endIndex], step[1]);
   }
 
-  console.log(result);
-  // s.split(t).forEach(v => {
-  //   result+=
-  // });
-  // console.log(s.split(t));
-
-
-  // console.log(s.split(t, ','));
-  // s.split(t, ',');
-  // console.log(s);
-
-
-  // for (let v of s) {
-  //   console.log(v);
-  // }
+  return arr.join('');
 }
 
-console.log(solution('teachermode', 'e'));
-// console.log(solution('eteachermode', 'e'));
+solution('teachermode', 'e');
+solution('eteachermode', 'e');
+solution('eteachermod', 'e');

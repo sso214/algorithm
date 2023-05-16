@@ -15,17 +15,11 @@ found7, time: study; Yduts; emit, 7Dnuof
 */
 
 /*내 답변*/
-function solution(s) {
-  const v = s.replace(/[^A-Za-z]/g, '')
-
-  if(v.length % 2 === 1) return 'NO';
-
-  const start = v.substring(0, v.length / 2);
-  const end = v.substring(v.length/2).split('').reverse().join('');
-
-  return new RegExp(`^${start}$`, 'i').test(end) ? 'YES' : 'NO';
+function solution1(s) {
+  s = s.toLowerCase().replace(/[^a-z]/g, '');
+  return s === [...s].reverse().join('') ? 'YES' : 'NO';
 }
 
-console.log(solution('found7, time: study; Yduts; emit, 7Dnuof'));
-console.log(solution('found7, time: svudy; Yduts; emit, 7Dnuof'));
-console.log(solution('found7, time: study; DYduts; emit, 7Dnuof'));
+solution1('found7, time: study; Yduts; emit, 7Dnuof');
+solution1('found7, time: svudy; Yduts; emit, 7Dnuof');
+solution1('found7, time: study; DYduts; emit, 7Dnuof');

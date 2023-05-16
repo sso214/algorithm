@@ -14,19 +14,40 @@
 */
 
 /*내 답변*/
-function solution(s) {
+function solution1(s) {
   let result = '';
   let v = '';
   const map = new Map();
 
-  for (let i=0; i<s.length; i++) {
+  for (let i = 0; i < s.length; i++) {
     v = s[i];
-    map.set(v, map.has(v) ? map.get(v)+1 : 1);
+    map.set(v, map.has(v) ? map.get(v) + 1 : 1);
 
-    if (v !== s[i+1]) result += `${v}${map.get(v) === 1 ? '' : map.get(v)}`;
+    if (v !== s[i + 1]) {
+      result += `${v}${map.get(v) === 1 ? '' : map.get(v)}`;
+    }
   }
   return result;
 }
 
-console.log(solution('KKHSSSSSSSE'));
-console.log(solution('KKHSSSSSSSEEE'));
+console.log(solution1('KKHSSSSSSSE'));
+console.log(solution1('KKHSSSSSSSEEE'));
+
+
+function solution2(s) {
+  let count = 1;
+  let answer = '';
+
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === s[i + 1]) {
+      count++;
+    } else {
+      answer += `${s[i]}${count > 1 ? count : ''}`;
+      count = 1;
+    }
+  }
+  return answer;
+}
+
+console.log(solution2('KKHSSSSSSSE'));
+console.log(solution2('KKHSSSSSSSEEE'));

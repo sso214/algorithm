@@ -14,24 +14,26 @@
 */
 
 /*내 답변*/
-function solution(s) {
-  if(s.length % 2 !== 0) return 'NO';
-
-  const mid = s.length / 2;
-  // const start = s.substring(0, mid).toUpperCase();
-  // const end = s.substring(mid).toUpperCase();
-
-  const regex = new RegExp(`^[${s.substring(0, mid)}]{2}$`, 'i');
-  // const regex = new RegExp(`^[${s.substring(0, mid)}]{2}$`, 'i');
-  console.log(regex.test(s));
-
-  // console.log(start);
-  // console.log(end);
-  // const mid = s.length / 2;
-  // return
+function solution1(s) {
+  s = s.toUpperCase();
+  return s === [...s].reverse().join('') ? 'YES' : 'NO';
 }
 
-console.log(solution('gogo'));
-console.log(solution('gooG'));
-console.log(solution('abc'));
-console.log(solution('goood'));
+solution1('gooG');
+solution1('goooG');
+solution1('goob');
+
+
+function solution2(s) {
+  let answer = 'YES';
+  s = s.toUpperCase();
+
+  for (let i = 0; i < Math.floor(s.length / 2); i++) {
+    if (s[i] !== s[s.length - 1 - i]) return 'NO';
+  }
+  return answer;
+}
+
+solution2('abcdedcba');
+solution2('goooG');
+solution2('goob');
