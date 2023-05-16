@@ -16,7 +16,16 @@ found7, time: study; Yduts; emit, 7Dnuof
 
 /*내 답변*/
 function solution(s) {
+  const v = s.replace(/[^A-Za-z]/g, '')
 
+  if(v.length % 2 === 1) return 'NO';
+
+  const start = v.substring(0, v.length / 2);
+  const end = v.substring(v.length/2).split('').reverse().join('');
+
+  return new RegExp(`^${start}$`, 'i').test(end) ? 'YES' : 'NO';
 }
 
-console.log(solution(''));
+console.log(solution('found7, time: study; Yduts; emit, 7Dnuof'));
+console.log(solution('found7, time: svudy; Yduts; emit, 7Dnuof'));
+console.log(solution('found7, time: study; DYduts; emit, 7Dnuof'));
