@@ -10,9 +10,27 @@ N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 �
 첫 줄에 뒤집은 소수를 출력합니다. 출력순서는 입력된 순서대로 출력합니다.
 
 ▣ 입력예제 1
-9
 32 55 62 20 250 370 200 30 100
-▣ 출력예제 1 23 2 73 2 3
+▣ 출력예제 1
+23 2 73 2 3
 */
 
 /*내 답변*/
+function isPrime(n) {
+  if (n === 1) return false;
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+function solution(arr) {
+  let answer = [];
+  for (let v of arr) {
+    const n = +([...`${v}`].reverse().join(''));
+    if (isPrime(n)) answer.push(n);
+  }
+  return answer;
+}
+
+solution([32, 55, 62, 20, 250, 370, 200, 30, 100]);

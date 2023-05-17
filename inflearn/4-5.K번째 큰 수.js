@@ -14,7 +14,26 @@
 10 3
 13 15 34 23 45 65 33 11 26 42
 
-▣ 출력예제 1 143
+▣ 출력예제 1
+143
 */
 
 /*내 답변*/
+function solution(n,k,arr) {
+  let list = [];
+
+  for(let i=0; i<arr.length; i++) {
+    for (let j=i+1; j<arr.length; j++) {
+      for(let l=j+1; l<arr.length; l++) {
+        const sum = arr[i]+arr[j]+arr[l];
+        if (!list.includes(sum)) {
+          list.push(sum);
+        }
+      }
+    }
+  }
+
+  list.sort((a,b)=>b-a);
+  return list[k-1];
+}
+solution(10,3,[13, 15, 34, 23, 45, 65, 33, 11, 26, 42]);

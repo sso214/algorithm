@@ -9,9 +9,22 @@ N개의 자연수가 입력되면 각 자연수의 자릿수의 합을 구하고
 자릿수의 합이 최대인 자연수를 출력한다.
 
 ▣ 입력예제 1
-7
 128 460 603 40 521 137 123
-▣ 출력예제 1 137
+▣ 출력예제 1
+137
 */
 
 /*내 답변*/
+function solution(arr) {
+  let max = [0,0];
+  for (const v of arr) {
+    const sum = [...`${v}`].reduce((acc, cur) => acc+(+cur), 0);
+    if (sum === max[1]) max[0] = Math.max(v, max[0]);
+    if (sum > max[1]) max[1] = sum;
+  }
+
+  return max[0];
+}
+
+solution([128, 460, 603, 40, 521, 137, 123]);
+
