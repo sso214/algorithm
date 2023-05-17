@@ -20,7 +20,21 @@ N개의 수로 이루어진 수열이 주어집니다.
 */
 
 /*나의 답변*/
-function solution() {
+function solution(n, arr) {
+    let count = 0;
+    let sum;
 
+    for (let i = 0; i < arr.length; i++) {
+        sum = 0;
+        console.log(`${arr[i]}-------`);
+
+        for (let j = 0; sum < 5 && i + j < arr.length; j++) {
+            sum += arr[i + j];
+            if (sum <= 5) count++;
+            console.log(arr[i], i + j, arr[i + j], sum);
+        }
+
+        console.log(`count = ${count}`);
+    }
 }
 solution(5, [1,3,1,2,3]);
