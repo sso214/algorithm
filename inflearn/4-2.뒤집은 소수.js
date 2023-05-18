@@ -25,12 +25,29 @@ function isPrime(n) {
 }
 
 function solution(arr) {
-  let answer = [];
-  for (let v of arr) {
-    const n = +([...`${v}`].reverse().join(''));
-    if (isPrime(n)) answer.push(n);
-  }
-  return answer;
+    let answer = [];
+    for (let v of arr) {
+        const n = +([...`${v}`].reverse().join(''));
+        if (isPrime(n)) answer.push(n);
+    }
+    return answer;
 }
 
 solution([32, 55, 62, 20, 250, 370, 200, 30, 100]);
+
+
+/*강의*/
+function solution2(arr) {
+    let answer = [];
+    for (let v of arr) {
+        let res = 0;
+        while (v) {
+            res = res * 10 + (v % 10);
+            v = parseInt(v / 10);
+        }
+        if (isPrime(res)) answer.push(res);
+    }
+    return answer;
+}
+
+solution2([32, 55, 62, 20, 250, 370, 200, 30, 100]);

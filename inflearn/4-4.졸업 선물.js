@@ -31,7 +31,7 @@
 /*내 답변*/
 function solution(money, list) {
   let count = 0;
-  list.sort((a,b)=>a[0]-b[0]);
+  list.sort((a, b) => a.reduce((acc, cur) => acc + cur, 0) - b.reduce((acc, cur) => acc + cur, 0));
 
   for(let v of list) {
     const sum = v[0] + v[1];
@@ -49,6 +49,7 @@ function solution(money, list) {
     }
   }
 
+  console.log(count);
   return count;
 }
 

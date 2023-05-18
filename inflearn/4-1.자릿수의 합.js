@@ -18,7 +18,7 @@ N개의 자연수가 입력되면 각 자연수의 자릿수의 합을 구하고
 function solution(arr) {
   let max = [0,0];
   for (const v of arr) {
-    const sum = [...`${v}`].reduce((acc, cur) => acc+(+cur), 0);
+    const sum = [...`${v}`].reduce((acc, cur) => acc + (+cur), 0);
     if (sum === max[1]) max[0] = Math.max(v, max[0]);
     if (sum > max[1]) max[1] = sum;
   }
@@ -28,3 +28,26 @@ function solution(arr) {
 
 solution([128, 460, 603, 40, 521, 137, 123]);
 
+/*강의*/
+function solution2(arr) {
+  let res, max = 0;
+
+  for (let v of arr) {
+    let tmp = v;
+    let sum = 0;
+    while (tmp) {
+      sum += tmp % 10;
+      tmp = Math.floor(tmp / 10);
+    }
+
+    if (sum > max) {
+      max = sum;
+      res = v;
+    } else if (sum === max) {
+      if (v > res) res = v;
+    }
+  }
+  return res;
+}
+
+solution2([128, 460, 603, 40, 521, 137, 123]);
