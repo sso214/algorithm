@@ -19,8 +19,17 @@ abc
 */
 
 /*나의 답변*/
-function solution() {
+function solution(s,t) {
+  let count = 0;
 
+  for (let i=0; i<s.length-t.length+1; i++) {
+    const target = s.substring(i, i+3);
+    const pattern = new RegExp(`^${[...t].map((v) => `(?=.*${v})`).join('')}[${t}]{${t.length}}$`);
+    /* const pattern = /^(?=.*a)(?=.*b)(?=.*c)[abc]{3}$/ */
+
+    if (pattern.test(target)) count++;
+    return count;
+  }
 }
 
 solution('bacaAacba', 'abc');
