@@ -30,27 +30,21 @@
 
 /*내 답변*/
 function solution(money, list) {
-  let count = 0;
-  list.sort((a, b) => a.reduce((acc, cur) => acc + cur, 0) - b.reduce((acc, cur) => acc + cur, 0));
+  let max_count = 0;
+  list.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1]));
 
-  for(let v of list) {
-    const sum = v[0] + v[1];
-    if (money - sum > 0) {
-      money -= sum;
+  for (let i = 0; i < list.length; i++) {
+    let count = 1;
+    let m = money - (list[i][0] / 2 + list[i][1]);
+    for (let j = 0; j < list.length; j++) {
+      if (i === j) continue;
+      m -= list[j][0] + list[j][1];
+      if (m < 0) break;
       count++;
-      continue;
     }
-
-    const sail = (v[0] / 2) + v[1];
-    if (money - sail >=0) {
-      money -= sail;
-      count++;
-      break;
-    }
+    if (max_count < count) max_count = count;
   }
-
-  console.log(count);
-  return count;
+  return max_count;
 }
 
 solution(28,[
