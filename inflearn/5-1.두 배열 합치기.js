@@ -70,6 +70,7 @@ function solution2(arr1, arr2) {
 solution2([1, 3, 5], [2, 3, 6, 7, 9]);
 
 
+/* 수업 - 투포인터 알고리즘 사용 */
 function solution3(arr1, arr2) {
     let list = [];
     let n = arr1.length;
