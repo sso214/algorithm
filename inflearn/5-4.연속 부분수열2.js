@@ -19,7 +19,7 @@ N개의 수로 이루어진 수열이 주어집니다.
 10
 */
 
-/*나의 답변*/
+/*나의 답변 n제곱*/
 function solution(n, arr) {
     let count = 0;
     let sum;
@@ -37,4 +37,24 @@ function solution(n, arr) {
         console.log(`count = ${count}`);
     }
 }
-solution(5, [1,3,1,2,3]);
+
+// solution(5, [1,3,1,2,3]);
+
+/* 수업 - 투포인터알고리즘 O(n) */
+function solution2(m, arr) {
+    let answer = 0;
+    let sum = 0;
+    let lt = 0;
+
+    for (let rt = 0; rt < arr.length; rt++) {
+        sum += arr[rt];
+        while (sum > m) {
+            sum -= arr[lt++];
+        }
+        answer += (rt - lt + 1);
+    }
+    console.log(answer);
+    return answer;
+}
+
+solution2(5, [1, 3, 1, 2, 3]);
