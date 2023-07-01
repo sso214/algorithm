@@ -23,10 +23,27 @@
 /*나의 답변*/
 function solution(k, arr) {
     let max = 0;
-    for (let i = 0; i < arr.length - 2; i++) {
-        max = Math.max([arr[i], arr[i + 1], arr[i + 2]].reduce((acc, cur) => acc + cur, 0), max);
+    for (let i = 0; i < arr.length - k - 1; i++) {
+        max = Math.max(arr.slice(i, i + k).reduce((acc, cur) => acc + cur, 0), max);
     }
     return max;
 }
 
 solution(3, [12, 15, 11, 20, 25, 10, 20, 19, 13, 15]);
+
+
+/*수업 답변 - Sliding Window 기법 사용*/
+function solution2(k, arr) {
+    let max = 0;
+    let sum = 0;
+    for (let i = 0; i < arr.length - k + 1; i++) {
+        sum += arr[i];
+        if (i > k - 1) {
+            sum -= arr[i - k];
+            if (max < sum) max = sum;
+        }
+    }
+    return max;
+}
+
+solution2(3, [12, 15, 11, 20, 25, 10, 20, 19, 13, 15]);
