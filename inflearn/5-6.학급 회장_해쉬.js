@@ -21,10 +21,11 @@ C
 /*나의 답변*/
 function solution(s) {
     const map = new Map();
-    for (let v of [...s]) {
-        map.set(v, map.has(v) ? map.get(v) + 1 : 1);
-    }
+    for (let v of s) map.set(v, map.has(v) ? map.get(v) + 1 : 1);
     return [...map].sort((a, b) => b[1] - a[1])[0][0];
 }
 
 solution('ACBACCACCBDEDE');
+
+/*수업 풀이 방식 - Hash Map 사용*/
+// sort 대신 for을 사용해 최댓값 비교한 부분 제외하고 내가 푼 방식과 같음
