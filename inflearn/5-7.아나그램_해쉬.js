@@ -29,3 +29,35 @@ const solution = (s1, s2) => [...s1].sort().join('') === [...s2].sort().join('')
 
 solution('AbaAeCe', 'baeeACA');
 solution('abaCC', 'Caaab');
+
+/*수업 설명 듣고 혼자 풀어본 답변 - Hash Map 사용*/
+function solution2(s1, s2) {
+    let map = new Map();
+    for (const v of s1) map.set(v, map.has(v) ? map.get(v) + 1 : 1);
+    for (const v of s2) {
+        map.set(v, map.has(v) ? map.get(v) - 1 : 1);
+        if (map.get(v) === 0) map.delete(v);
+    }
+    return map.size === 0 ? 'YES' : 'NO';
+}
+
+solution2('AbaAeCe', 'baeeACA');
+solution2('abaCC', 'Caaab');
+solution2('abaCC', 'CCaabz');
+
+/*수업 풀이 방식 - Hash Map 사용*/
+function solution3(s1, s2) {
+    let answer = 'YES';
+    let map = new Map();
+    for (const v of s1) map.set(v, map.has(v) ? map.get(v) + 1 : 1);
+    for (const v of s2) {
+        //내가 푼 방식과 달리 조건이 다른 경우 바로 return함
+        if (!map.has(v) || map.get(v) === 0) return 'NO';
+        map.set(v, map.get(v) - 1);
+    }
+    return answer;
+}
+
+solution3('AbaAeCe', 'baeeACA');
+solution3('abaCC', 'Caaab');
+solution3('abaCC', 'CCaabz');
