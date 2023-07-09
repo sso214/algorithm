@@ -36,3 +36,22 @@ function solution(s) {
 console.log(solution('(()(()))(()'));
 console.log(solution('(()(()))(())'));
 console.log(solution('(()(())))())'));
+
+
+/*수업 풀이 방식*/
+function solution2(s) {
+  let answer = "YES";
+  stack = [];
+
+  for (let x of s) {
+    if (x === '(') stack.push(x);
+    else {
+      if (stack.length === 0) return "NO";
+      stack.pop();
+    }
+  }
+  if (stack.length > 0) return "NO";
+  return answer;
+}
+
+solution2("(()(()))(()");
