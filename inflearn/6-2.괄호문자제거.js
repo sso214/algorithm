@@ -27,3 +27,19 @@ function solution(s) {
 }
 
 solution('(A(BC)D)EF(G(H)(IJ)K)LM(N)');
+
+
+/*수업 풀이 방식*/
+function solution2(s) {
+  let answer;
+  let stack = [];
+  for (let x of s) {
+    if (x === ')') {
+      while (stack.pop() !== '(') ;
+    } else stack.push(x);
+  }
+  answer = stack.join('');
+  return answer;
+}
+
+console.log(solution2("(A(BC)D)EF(G(H)(IJ)K)LM(N)"));
