@@ -31,3 +31,39 @@
 */
 
 /*내 답변*/
+function solution(s) {
+    let result = 0;
+    let arr = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '(') arr.push('(');
+        else {
+            arr.pop();
+            if (s[i - 1] === '(') result += arr.length;
+            else result++;
+            //stack.pop(); 이 위치에 하면 레이저까지 카운팅한다.
+        }
+    }
+    return result;
+}
+
+solution('()(((()())(())()))(())')
+
+
+/*수업 풀이 방식*/
+function solution2(s) {
+    let answer = 0;
+    let stack = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '(') stack.push('(');
+        else {
+            stack.pop();
+            if (s[i - 1] === '(') answer += stack.length;
+            else answer++;
+            //stack.pop(); 이 위치에 하면 레이저까지 카운팅한다.
+        }
+    }
+    return answer;
+}
+
+let a = "()(((()())(())()))(())";
+console.log(solution2(a));

@@ -35,3 +35,25 @@ solution('352+*9-23+*');
 5. 현재 연산자를 스택에 넣음
 6. 후위 연산식을 모두 읽은 후에는 스택에 남아있는 모든 연산자를 중위 표기법에 추가
 */
+
+/*수업 풀이 방식*/
+function solution2(s) {
+  let answer;
+  let stack = [];
+  for (let x of s) {
+    if (!isNaN(x)) stack.push(Number(x));
+    else {
+      let rt = stack.pop();
+      let lt = stack.pop();
+      if (x === '+') stack.push(lt + rt);
+      else if (x === '-') stack.push(lt - rt);
+      else if (x === '*') stack.push(lt * rt);
+      else if (x === '/') stack.push(lt / rt);
+    }
+  }
+  answer = stack[0];
+  return answer;
+}
+
+let str = "352+*9-";
+console.log(solution2(str));
